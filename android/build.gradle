@@ -24,7 +24,7 @@ android {
   buildToolsVersion '27.0.3'
   defaultConfig {
     minSdkVersion 16
-    targetSdkVersion 27
+    targetSdkVersion rootProject.hasProperty('targetSdkVersion') ? rootProject.targetSdkVersion : DEFAULT_TARGET_SDK_VERSION
     versionCode 1
     versionName "1.0"
     multiDexEnabled true
@@ -85,14 +85,16 @@ repositories {
   }
 }
 
-def supportVersion = "27.1.1"
+def supportVersion = rootProject.hasProperty('supportLibVersion') ? rootProject.supportLibVersion : DEFAULT_SUPPORT_LIB_VERSION
 
 dependencies {
   // compile fileTree(include: ['*.jar'], dir: 'libs')
-  api "com.facebook.react:react-native:+"  // From node_modules
-  api "com.android.support:support-v4:$supportVersion"
-  api "com.android.support:customtabs:$supportVersion"
-  api "com.android.support:appcompat-v7:$supportVersion"
+  implementation "com.facebook.react:react-native:+"  // From node_modules
+  implementation 'com.android.support:support-v4:27.1.1'
+  implementation 'com.android.support:appcompat-v7:27.1.1'
+  implementation 'com.android.support:cardview-v7:27.1.1'
+  implementation 'com.android.support:customtabs:27.1.1'
+  implementation 'com.android.support:design:27.1.1'
 
   // Firebase SDKs
   compileOnly('com.crashlytics.sdk.android:crashlytics:2.9.3@aar') {
